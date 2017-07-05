@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "react",
+    ["env", { "modules": false }]
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "transform-object-rest-spread",
+    "syntax-trailing-function-commas"
+  ]
+}
