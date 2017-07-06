@@ -35,6 +35,7 @@ export default class StoryBook extends Component {
   getChildContext() {
     return {
       setSelected: this.setSelected,
+      selected: this.state.currentSelection,
     }
   }
 
@@ -74,4 +75,5 @@ export default class StoryBook extends Component {
 
 StoryBook.childContextTypes = {
   setSelected: PropTypes.func,
+  selected: PropTypes.arrayOf(PropTypes.number),
 }
