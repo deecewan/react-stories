@@ -56,17 +56,35 @@ export default class StoryBook extends Component {
     return selected;
   }
 
+
+  getName() {
+    const remaining = [].concat(this.state.currentSelection);
+    let tree = this.state.tree;
+    let words = [];
+
+    while (remaining.length > 1) {
+      const position = remaining.shift();
+      const branch = tree[position];
+      words.push(branch[0]);
+      tree = branch[1];
+    }
+    words.push(tree[remaining[0]]);
+
+    return words.join(' → ');
+  }
+
   render() {
     console.log(this.state.tree);
     return (
-      <div>
-        <div style={{ width: '30%', display: 'inline-block' }}>
+      <div style={{ display: 'flex' }}>
+        <div style={{ width: '30%'}}>
           <Sidebar setSelected={this.setSelected} tree={this.state.tree}/>
         </div>
-
-        <div style={{ width: '70%', display: 'inline-block' }}>
-          Selected Component
-          {this.getSelected()}
+        <div>
+          <h4>Selected: {this.getName()}</h4>
+          <div className="content">
+            {this.getSelected()}
+          </div>
         </div>
       </div>
     )

@@ -81,7 +81,7 @@ SidebarStory.contextTypes = {
   selected: PropTypes.arrayOf(PropTypes.number),
 }
 
-export class Sidebar extends Component {
+export default class Sidebar extends Component {
   constructor(props) {
     super(props);
 
@@ -93,7 +93,7 @@ export class Sidebar extends Component {
   }
 
   render() {
-    const tree = props.tree;
+    const tree = this.props.tree;
     return (
       <div className="sidebar">
         {tree.map((branch, i) =>
