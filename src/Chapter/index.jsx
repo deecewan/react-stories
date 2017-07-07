@@ -1,51 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+/* @flow */
 
-export default class Chapter extends Component {
-  constructor(props, context) {
-    super(props, context);
+// import type { Children } from 'react';
+import React, { type Children } from 'react';
 
-    this.state = {
-      tree: {},
-    }
+type PropsType = {
+  children: Children,
+  for: string,
+};
 
-    this.addDescription = this.addDescription.bind(this);
-  }
-
-  getChildContext() {
-    return {
-      addDescription: this.addDescription,
-    };
-  }
-
-  addDescription(desc) {
-    this.setState({
-
-    });
-  }
-
-  buildTree() {
-    return {
-      [this.props.for]: [].concat(this.props.children).map(child => {
-        console.log(child.constructor.displayName);
-      }),
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <div>Chapter {this.props.for}</div>
-        <div>Children: {this.props.children}</div>
-      </div>
-    );
-  }
+export default function Chapter(props: PropsType) {
+  return (
+    <div>
+      <div>Chapter {props.for}</div>
+      <div>Children: {props.children}</div>
+    </div>
+  );
 }
-
-Chapter.contextTypes = {
-  addBranch: PropTypes.func,
-};
-
-Chapter.childContextTypes = {
-  addDescription: PropTypes.func,
-};

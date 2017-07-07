@@ -7,6 +7,7 @@
   "author": "David Buchan-Swanson <david.buchanswanson+npm@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "lint": "eslint --ext=.js,.jsx .",
     "serve": "NODE_ENV=development webpack-dev-server"
   },
   "dependencies": {
@@ -25,9 +26,11 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.24.1",
+    "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
     "eslint-plugin-flowtype": "^2.34.1",
     "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "html-webpack-plugin": "^2.29.0",
     "jest": "^20.0.4",

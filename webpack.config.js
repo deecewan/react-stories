@@ -1,10 +1,12 @@
+/* @flow */
+
 const path = require('path');
 const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    bundle: ['./src/demo/index.jsx']
+    bundle: ['./src/demo/index.jsx'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -16,12 +18,13 @@ module.exports = {
       exclude: /node_modules/,
       use: [{
         loader: 'babel-loader',
-      }]
-    }]
+      }],
+    }],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
   },
+  devtool: 'sourcemap',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     hot: true,
@@ -31,7 +34,7 @@ module.exports = {
   plugins: [
     new HTMLPlugin({ template: 'src/index.html' }),
   ],
-}
+};
 
 if (process.env.NODE_ENV === 'development') {
   module.exports.entry.bundle.unshift(

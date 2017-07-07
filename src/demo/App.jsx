@@ -1,7 +1,9 @@
+/* @flow */
+
 import React from 'react';
 import { StoryBook, Chapter, Story } from '../';
 
-function SubItem({ number }) {
+function SubItem({ number }: { number: string }) {
   return (
     <div>
       This is a story for sub button item {number}
@@ -18,7 +20,9 @@ export default function App() {
         </Story>
       </Chapter>
       <Chapter for="Button">
-        <Story desc="Standard Button"></Story>
+        <Story desc="Standard Button">
+          <button>Click Me!</button>
+        </Story>
         <Chapter for="SubButton">
           <Story desc="sub button item 1">
             <SubItem number="1" />

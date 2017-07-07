@@ -1,6 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+/* @flow */
 
-export default function Story(props) {
-  return <div>{props.children}</div>
+import React, { type Children } from 'react';
+
+type PropsType = {
+  children: Children,
+};
+
+export default function Story(props: PropsType) {
+  return <div>{props.children}</div>;
 }

@@ -4,7 +4,20 @@
   "plugins": [
     "flowtype"
   ],
+  "env": {
+    "browser": true
+  },
   "rules": {
+    /* enforce component type definitions at the top */
+    "react/sort-comp": [2, {
+      "order": [
+        "type-annotations",
+        "static-methods",
+        "lifecycle",
+        "everything-else",
+        "render"
+      ]
+    }],
     /* flowtype linting rules */
     /* enforce boolean naming style */
     "flowtype/boolean-style": [
@@ -65,6 +78,11 @@
       "always"
     ],
     /* marks flow types as used - used to work with other rules */
-    "flowtype/use-flow-type": 2
+    "flowtype/use-flow-type": 2,
+
+    /* temporary during development */
+    /* TODO: Remove */
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/no-static-element-interactions": 0
   }
 }
