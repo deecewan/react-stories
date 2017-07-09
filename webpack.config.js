@@ -6,7 +6,7 @@ const HTMLPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    bundle: ['./src/demo/index.jsx'],
+    bundle: ['./example/index.jsx'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

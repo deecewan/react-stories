@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { StoryBook, Chapter, Story } from '../';
+import { StoryBook, Chapter, Story } from '../src';
 
 function SubItem({ number }: { number: string }) {
   return (
