@@ -27,7 +27,7 @@ export default class Sidebar extends Component {
   }
 
   getChildren() {
-    this.props.tree.map((branch, i) => {
+    return this.props.tree.map((branch, i) => {
       if (typeof branch[0] !== 'string') {
         throw new Error(
           `${branch.toString()} is not a Chapter.` +

@@ -1,7 +1,8 @@
 {
   "presets": [
     "react",
-    ["env", { "modules": false }]
+    ["env", { "modules": false }],
+    "flow"
   ],
   "plugins": [
     "react-hot-loader/babel",

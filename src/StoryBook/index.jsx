@@ -21,6 +21,7 @@ type PropsType = {
 
 type StateType = {
   currentSelection: Array<number>,
+  sidebarOpen: boolean,
   tree: TreeType,
 };
 
@@ -29,6 +30,7 @@ export default class StoryBook extends Component {
   props: PropsType;
   state: StateType;
   setSelected: (Array<number>) => void;
+  toggleSidebar: () => void;
 
   constructor(props: PropsType) {
     super(props);
@@ -38,9 +40,11 @@ export default class StoryBook extends Component {
     this.state = {
       tree, // store in state for easier access later
       currentSelection: [],
+      sidebarOpen: true,
     };
 
     this.setSelected = this.setSelected.bind(this);
+    this.toggleSidebar = this.toggleSidebar.bind(this);
   }
 
   getChildContext() {
@@ -52,6 +56,10 @@ export default class StoryBook extends Component {
 
   setSelected(path: Array<number>) {
     this.setState({ currentSelection: path });
+  }
+
+  toggleSidebar() {
+    this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
   getSelected() {
@@ -67,6 +75,17 @@ export default class StoryBook extends Component {
     return selected;
   }
 
+  getSidebar() {
+    if (!this.state.sidebarOpen) {
+      return null;
+    }
+
+    return (
+      <div style={{ width: '30%' }}>
+        <Sidebar setSelected={this.setSelected} tree={this.state.tree} />
+      </div>
+    );
+  }
 
   getName() {
     const remaining = [].concat(this.state.currentSelection);
@@ -86,14 +105,19 @@ export default class StoryBook extends Component {
 
   render() {
     return (
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '30%' }}>
-          <Sidebar setSelected={this.setSelected} tree={this.state.tree} />
-        </div>
-        <div>
+      <div>
+        <div style={{ display: 'flex' }}>
+          <button onClick={this.toggleSidebar} type="button">
+            {this.state.sidebarOpen ? 'Close' : 'Open'} Sidebar
+          </button>
           <h4>Selected: {this.getName()}</h4>
-          <div className="content">
-            {this.getSelected()}
+        </div>
+        <div style={{ display: 'flex' }}>
+          {this.getSidebar()}
+          <div>
+            <div className="content">
+              {this.getSelected()}
+            </div>
           </div>
         </div>
       </div>
