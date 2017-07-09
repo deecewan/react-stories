@@ -131,4 +131,8 @@ typings/
 
 # End of https://www.gitignore.io/api/web,code,node,intellij
 
+# webpack assets for local testing
 dist/
+# babel compiled version of this library
+lib/
+.DS_Store

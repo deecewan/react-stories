@@ -4,6 +4,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
 
+const modulePath = path.join(__dirname, 'node_modules');
+
 module.exports = {
   entry: {
     bundle: ['./example/index.jsx'],
@@ -17,7 +19,7 @@ module.exports = {
       test: /.jsx?/,
       exclude: /node_modules/,
       use: [{
-        loader: 'babel-loader',
+        loader: path.join(modulePath, 'babel-loader'),
       }],
     }],
   },
@@ -32,7 +34,7 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
-    new HTMLPlugin({ template: 'src/index.html' }),
+    new HTMLPlugin({ template: path.join(__dirname, 'src', 'index.html') }),
   ],
 };
 

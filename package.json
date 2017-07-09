@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "description": "Declarative Storybooks",
   "main": "lib/index.js",
+  "bin": {
+    "start-stories": "lib/bin/index.js"
+  },
   "repository": "deecewan/react-stories",
   "author": "David Buchan-Swanson <david.buchanswanson+npm@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "babel -d lib/ src/",
     "lint": "eslint --ext=.js,.jsx .",
     "serve": "NODE_ENV=development webpack-dev-server"
   },
@@ -15,7 +19,8 @@
     "flow-bin": "^0.49.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
