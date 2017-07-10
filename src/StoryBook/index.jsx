@@ -22,6 +22,7 @@ type PropsType = {
 
 type StateType = {
   currentSelection: Array<number>,
+  selectionType: 'chapter' | 'story',
   sidebarOpen: boolean,
   tree: TreeType,
 };
@@ -41,6 +42,7 @@ export default class StoryBook extends Component {
     this.state = {
       tree, // store in state for easier access later
       currentSelection: [],
+      selectionType: 'chapter', // TODO: decide the correct initial value
       sidebarOpen: true,
     };
 
@@ -55,8 +57,8 @@ export default class StoryBook extends Component {
     };
   }
 
-  setSelected(path: Array<number>) {
-    this.setState({ currentSelection: path });
+  setSelected(path: Array<number>, type: 'chapter' | 'story') {
+    this.setState({ currentSelection: path, selectionType: type });
   }
 
   toggleSidebar() {
@@ -64,7 +66,7 @@ export default class StoryBook extends Component {
   }
 
   getSelected() {
-    if (this.state.currentSelection.length === 0) {
+    if (this.state.currentSelection.length === 0 || this.state.selectionType !== 'story') {
       return null;
     }
     const remaining = [].concat(this.state.currentSelection); // clone the array
@@ -93,16 +95,24 @@ export default class StoryBook extends Component {
     if (remaining.length === 0) {
       return 'Select an item';
     }
+
     let tree = this.state.tree;
     const words = [];
 
-    while (remaining.length > 1) {
+    while (remaining.length > 0) {
       const position = remaining.shift();
       const branch = tree[position];
-      words.push(branch[0]);
+      if (typeof branch === 'string') {
+        words.push(branch);
+      } else {
+        words.push(branch[0]);
+      }
       tree = branch[1];
     }
-    words.push(tree[remaining[0]]);
+
+    if (this.state.selectionType === 'chapter') {
+      words.push('...');
+    }
 
     return words.join(' → ');
   }

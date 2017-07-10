@@ -25,34 +25,29 @@ type PropsType = {
   stories: TreeType,
 };
 
-type StateType = {
-  open: boolean,
-};
-
 type ContextType = {
   selected: Array<number>,
+  setSelected: (Array<number>, 'chapter') => void,
 };
 
 export default class SidebarChapter extends Component {
+  context: ContextType;
   props: PropsType;
-  state: StateType;
   handleClick: () => void;
 
   constructor(props: PropsType, context: ContextType) {
     super(props, context);
-
-    this.state = { open: false };
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e: SyntheticEvent) {
     e.stopPropagation();
-    this.setState({ open: !this.state.open });
+    this.context.setSelected(this.props.path, 'chapter');
   }
 
   getChildren() {
-    if (!this.state.open) {
+    if (!this.getSelectedState()) {
       return null;
     }
 
@@ -63,13 +58,16 @@ export default class SidebarChapter extends Component {
     );
   }
 
-  render() {
+  getSelectedState() {
     const thisPathLength = this.props.path.length;
     const selectedSubset = this.context.selected.slice(0, thisPathLength);
-    const isSelected = isSame(this.props.path, selectedSubset);
+    return isSame(this.props.path, selectedSubset);
+  }
+
+  render() {
     return (
       <div style={{ marginLeft: getIndent(this.props.path) }}>
-        <h4 onClick={this.handleClick}>{this.props.name}{isSelected ? '→' : null}</h4>
+        <h4 onClick={this.handleClick}>{this.props.name}{this.getSelectedState() ? '→' : null}</h4>
         {this.getChildren()}
       </div>
     );
@@ -78,4 +76,5 @@ export default class SidebarChapter extends Component {
 
 SidebarChapter.contextTypes = {
   selected: PropTypes.arrayOf(PropTypes.number),
+  setSelected: PropTypes.func,
 };

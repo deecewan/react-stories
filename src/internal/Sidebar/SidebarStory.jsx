@@ -11,7 +11,7 @@ type PropsType = {
 
 type ContextType = {
   selected: Array<number>,
-  setSelected: (Array<number>) => void,
+  setSelected: (Array<number>, 'story') => void,
 };
 
 export default function SidebarStory(props: PropsType, context: ContextType) {
@@ -19,7 +19,7 @@ export default function SidebarStory(props: PropsType, context: ContextType) {
   return (
     <div
       style={{ marginLeft: getIndent(props.path) }}
-      onClick={() => context.setSelected(props.path)}
+      onClick={() => context.setSelected(props.path, 'story')}
     >
       {isCurrentStory ? '→ ' : null}
       {props.desc}
