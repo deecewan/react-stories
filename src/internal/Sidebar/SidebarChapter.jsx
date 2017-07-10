@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SidebarStory from './SidebarStory';
 import { getIndent, isSame } from './util';
 import type { TreeType } from '../../types.js.flow';
+import * as style from './style';
 
 function renderStories(stories: TreeType, path: Array<number>) {
   return stories.map((child, i) => {
@@ -46,8 +47,8 @@ export default class SidebarChapter extends Component {
     this.context.setSelected(this.props.path, 'chapter');
   }
 
-  getChildren() {
-    if (!this.getSelectedState()) {
+  getChildren(selected: boolean) {
+    if (!selected) {
       return null;
     }
 
@@ -65,10 +66,16 @@ export default class SidebarChapter extends Component {
   }
 
   render() {
+    const selectedState = this.getSelectedState();
     return (
       <div style={{ marginLeft: getIndent(this.props.path) }}>
-        <h4 onClick={this.handleClick}>{this.props.name}{this.getSelectedState() ? '→' : null}</h4>
-        {this.getChildren()}
+        <p
+          style={style.chapterTitle(selectedState)}
+          onClick={this.handleClick}
+        >
+          {this.props.name}
+        </p>
+        {this.getChildren(selectedState)}
       </div>
     );
   }

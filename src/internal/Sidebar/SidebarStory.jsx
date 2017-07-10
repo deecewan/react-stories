@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getIndent, isSame } from './util';
+import * as style from './style';
 
 type PropsType = {
   desc: string,
@@ -21,8 +22,7 @@ export default function SidebarStory(props: PropsType, context: ContextType) {
       style={{ marginLeft: getIndent(props.path) }}
       onClick={() => context.setSelected(props.path, 'story')}
     >
-      {isCurrentStory ? '→ ' : null}
-      {props.desc}
+      <p style={style.storyTitle(isCurrentStory)}>{props.desc}</p>
     </div>
   );
 }

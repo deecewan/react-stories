@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import SidebarChapter from './SidebarChapter';
 import type { TreeType } from '../../types.js.flow';
+import * as style from './style';
 
 type PropsType = {
   tree: TreeType,
@@ -50,7 +51,7 @@ export default class Sidebar extends Component {
 
   render() {
     return (
-      <div className="sidebar">
+      <div className="sidebar" style={style.sidebar}>
         {this.getChildren()}
       </div>
     );
