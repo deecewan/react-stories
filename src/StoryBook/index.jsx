@@ -4,6 +4,7 @@ import React, { Component, type Element } from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from '../internal/Sidebar';
 import type { TreeType } from '../types.js.flow';
+import * as style from './style';
 
 function getChildTree(child) {
   if (child.props.desc) {
@@ -81,7 +82,7 @@ export default class StoryBook extends Component {
     }
 
     return (
-      <div style={{ width: '30%' }}>
+      <div style={style.sidebarWrapper}>
         <Sidebar setSelected={this.setSelected} tree={this.state.tree} />
       </div>
     );
@@ -89,6 +90,9 @@ export default class StoryBook extends Component {
 
   getName() {
     const remaining = [].concat(this.state.currentSelection);
+    if (remaining.length === 0) {
+      return 'Select an item';
+    }
     let tree = this.state.tree;
     const words = [];
 
@@ -105,16 +109,18 @@ export default class StoryBook extends Component {
 
   render() {
     return (
-      <div>
-        <div style={{ display: 'flex' }}>
-          <button onClick={this.toggleSidebar} type="button">
+      <div style={style.outer}>
+        <div style={style.header}>
+          <button style={style.button} onClick={this.toggleSidebar} type="button">
             {this.state.sidebarOpen ? 'Close' : 'Open'} Sidebar
           </button>
-          <h4>Selected: {this.getName()}</h4>
+          <div style={style.titleWrapper}>
+            <h4>{this.getName()}</h4>
+          </div>
         </div>
-        <div style={{ display: 'flex' }}>
+        <div style={style.body}>
           {this.getSidebar()}
-          <div>
+          <div style={style.content}>
             <div className="content">
               {this.getSelected()}
             </div>
