@@ -1,13 +1,20 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "plugin:jest/recommended"
+  ],
   "plugins": [
-    "flowtype"
+    "flowtype",
+    "jest"
   ],
   "env": {
-    "browser": true
+    "browser": true,
+    "jest/globals": true
   },
   "rules": {
+    /* use `connect`ed components as component name */
+    "import/no-named-as-default": 0,
     /* enforce component type definitions at the top */
     "react/sort-comp": [2, {
       "order": [

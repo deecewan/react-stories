@@ -26,7 +26,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
   },
-  devtool: 'sourcemap',
+  devtool: 'inline-sourcemap',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     hot: true,

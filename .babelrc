@@ -1,7 +1,7 @@
 {
   "presets": [
     "react",
-    ["env", { "modules": false }],
+    ["env", { "modules": "commonjs" }],
     "flow"
   ],
   "plugins": [
