@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 /* @flow */
 
-import { resolve, join } from 'path';
+import { resolve } from 'path';
 import yargs from 'yargs';
 import webpack from 'webpack';
 import Server from 'webpack-dev-server';
-import execa from 'execa';
 import originalConfig from '../../webpack.config';
 // import createEntry from '../util/createEntry';
 
