@@ -2,7 +2,10 @@
 
 import React, { Component, type Element } from 'react';
 import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import store from '../internal/store';
 import Sidebar from '../internal/Sidebar';
+import Terminal from '../internal/Terminal';
 import type { TreeType } from '../types.js.flow';
 import * as style from './style';
 
@@ -119,24 +122,29 @@ export default class StoryBook extends Component {
 
   render() {
     return (
-      <div style={style.outer}>
-        <div style={style.header}>
-          <button style={style.button} onClick={this.toggleSidebar} type="button">
-            {this.state.sidebarOpen ? 'Close' : 'Open'} Sidebar
-          </button>
-          <div style={style.titleWrapper}>
-            <h4>{this.getName()}</h4>
+      <Provider store={store}>
+        <div style={style.outer}>
+          <div style={style.header}>
+            <button style={style.button} onClick={this.toggleSidebar} type="button">
+              {this.state.sidebarOpen ? 'Close' : 'Open'} Sidebar
+            </button>
+            <div style={style.titleWrapper}>
+              <h4>{this.getName()}</h4>
+            </div>
           </div>
-        </div>
-        <div style={style.body}>
-          {this.getSidebar()}
-          <div style={style.content}>
-            <div className="content">
-              {this.getSelected()}
+          <div style={style.body}>
+            {this.getSidebar()}
+            <div style={style.contentWrapper}>
+              <div style={style.content}>
+                {this.getSelected()}
+              </div>
+              <div style={style.terminal}>
+                <Terminal />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }

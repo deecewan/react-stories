@@ -44,6 +44,18 @@ export const sidebarWrapper = {
   padding: '0 10px',
 };
 
+export const contentWrapper = {
+  position: 'relative',
+  width: '100%',
+};
+
 export const content = {
   padding: 9, // same as `body` padding on Chrome
+  position: 'relative', // any absolutely position components work
+};
+
+export const terminal = {
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
 };
